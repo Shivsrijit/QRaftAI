@@ -220,44 +220,50 @@ export default function AssignmentsList() {
       ) : filteredAssignments.length === 0 ? (
         <div className={styles.emptyStateContainer}>
           {/* Centered Graphic Illustration SVG */}
-          <svg className={styles.emptyGraphic} viewBox="0 0 280 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Background circular shade */}
-            <circle cx="140" cy="120" r="70" fill="var(--bg-main)" opacity="0.6" />
-            
-            {/* Curved loop path on the left */}
-            <path d="M70 110 C 60 90, 75 75, 95 65 C 105 75, 90 95, 78 85" stroke="var(--text-secondary)" strokeWidth="2" strokeLinecap="round" fill="none" />
-            
-            {/* Document shape */}
-            <rect x="105" y="45" width="70" height="95" rx="8" fill="var(--bg-card)" stroke="var(--border-color)" strokeWidth="2" />
-            
-            {/* Document lines */}
-            <rect x="117" y="60" width="28" height="4" rx="2" fill="var(--text-primary)" />
-            <rect x="117" y="72" width="46" height="3" rx="1.5" fill="var(--text-muted)" opacity="0.5" />
-            <rect x="117" y="82" width="46" height="3" rx="1.5" fill="var(--text-muted)" opacity="0.5" />
-            <rect x="117" y="92" width="46" height="3" rx="1.5" fill="var(--text-muted)" opacity="0.5" />
-            <rect x="117" y="102" width="30" height="3" rx="1.5" fill="var(--text-muted)" opacity="0.5" />
-            
-            {/* Small card on top right of document */}
-            <rect x="165" y="40" width="32" height="16" rx="4" fill="var(--bg-card)" stroke="var(--border-color)" strokeWidth="1.5" />
-            <circle cx="173" cy="48" r="2" fill="var(--primary)" />
-            <rect x="180" y="46" width="10" height="3" rx="1.5" fill="var(--text-muted)" opacity="0.5" />
+        <svg className={styles.emptyGraphic} viewBox="0 0 280 270" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Outer soft ring */}
+          <circle cx="142" cy="138" r="115" fill="#dddde8" opacity="0.6" />
+          {/* Inner circle */}
+          <circle cx="142" cy="138" r="98" fill="#d8d8e4" />
 
-            {/* Sparkle/Star bottom left */}
-            <path d="M92 120 Q92 125 87 125 Q92 125 92 130 Q92 125 97 125 Q92 125 92 120" fill="var(--primary)" />
-            
-            {/* Circular dot on the right */}
-            <circle cx="196" cy="110" r="4" fill="#2563eb" />
-            
-            {/* Magnifying Glass */}
-            {/* Handle */}
-            <line x1="172" y1="140" x2="195" y2="163" stroke="#cbd5e1" strokeWidth="8" strokeLinecap="round" />
-            <line x1="172" y1="140" x2="195" y2="163" stroke="var(--border-color)" strokeWidth="6" strokeLinecap="round" />
-            <line x1="188" y1="156" x2="195" y2="163" stroke="#94a3b8" strokeWidth="6" strokeLinecap="round" />
-            {/* Frame */}
-            <circle cx="150" cy="118" r="28" fill="var(--bg-card)" stroke="var(--border-color)" strokeWidth="3" />
-            {/* Red bold X cross */}
-            <path d="M141 109 L159 127 M159 109 L141 127" stroke="#ef4444" strokeWidth="5.5" strokeLinecap="round" />
-          </svg>
+          {/* Swirl top left */}
+          <path d="M48 105 C44 90 50 76 62 72 C72 69 78 77 74 86 C70 95 58 93 56 84 C54 76 62 70 70 74" stroke="#1e2d5a" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+
+          {/* Document */}
+          <rect x="98" y="42" width="80" height="108" rx="10" fill="white" stroke="#e0e0ea" strokeWidth="1"/>
+          <rect x="112" y="58" width="28" height="6" rx="3" fill="#1a2540" />
+          <rect x="112" y="72" width="52" height="5" rx="2.5" fill="#c8c8d8" />
+          <rect x="112" y="83" width="52" height="5" rx="2.5" fill="#c8c8d8" />
+          <rect x="112" y="94" width="52" height="5" rx="2.5" fill="#c8c8d8" />
+          <rect x="112" y="105" width="52" height="5" rx="2.5" fill="#c8c8d8" />
+          <rect x="112" y="116" width="38" height="5" rx="2.5" fill="#c8c8d8" />
+
+          {/* Floating card top right */}
+          <rect x="172" y="36" width="48" height="24" rx="6" fill="white" stroke="#e0e0ea" strokeWidth="1"/>
+          <circle cx="183" cy="48" r="4" fill="#d0d0de" />
+          <rect x="192" y="44" width="20" height="4" rx="2" fill="#d0d0de" />
+          <rect x="192" y="51" width="14" height="4" rx="2" fill="#d0d0de" />
+
+          {/* Blue dot */}
+          <circle cx="210" cy="148" r="5.5" fill="#3b5bdb" />
+
+          {/* 4-point sparkle */}
+          <path d="M80 188 L83 178 L86 188 L96 191 L86 194 L83 204 L80 194 L70 191 Z" fill="#3b5bdb" />
+
+          {/* Magnifying glass handle */}
+          <line x1="182" y1="168" x2="212" y2="198" stroke="#a0a0bc" strokeWidth="16" strokeLinecap="round"/>
+          <line x1="182" y1="168" x2="212" y2="198" stroke="#c0c0d8" strokeWidth="11" strokeLinecap="round"/>
+          <line x1="182" y1="168" x2="212" y2="198" stroke="#d8d8ec" strokeWidth="7" strokeLinecap="round"/>
+
+          {/* Magnifying glass */}
+          <circle cx="152" cy="142" r="44" fill="#d8d8ec" />
+          <circle cx="152" cy="142" r="39" fill="#eeeef6" />
+          <circle cx="152" cy="142" r="39" fill="none" stroke="#b8b8d0" strokeWidth="3"/>
+
+          {/* Red X */}
+          <path d="M138 128 L166 156" stroke="#ef4444" strokeWidth="8" strokeLinecap="round"/>
+          <path d="M166 128 L138 156" stroke="#ef4444" strokeWidth="8" strokeLinecap="round"/>
+        </svg>
 
           <h3 className={styles.emptyTitle}>No assignments yet</h3>
           
@@ -371,15 +377,17 @@ export default function AssignmentsList() {
       )}
 
       {/* Floating Center Bottom Creation Callout */}
-      <div className={styles.floatingActionArea}>
-        <button 
-          className={styles.createBtnFloating} 
-          onClick={handleCreateNew}
-        >
-          <Plus size={18} />
-          <span>Create Assignment</span>
-        </button>
-      </div>
+      {filteredAssignments.length > 0 && (
+        <div className={styles.floatingActionArea}>
+          <button 
+            className={styles.createBtnFloating} 
+            onClick={handleCreateNew}
+          >
+            <Plus size={18} />
+            <span>Create Assignment</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

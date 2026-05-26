@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "VedaAI | Assessment Creator",
   description: "AI-Powered structured question paper generator and academic PDF exporter for teachers.",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
