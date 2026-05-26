@@ -1,0 +1,32 @@
+{
+  "name": "veda-ai-assessment-creator-backend",
+  "version": "1.0.0",
+  "description": "Backend for VedaAI Assessment Creator",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.6.0",
+    "bullmq": "^5.8.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "ioredis": "^5.4.1",
+    "mongoose": "^8.3.1",
+    "pdfkit": "^0.15.0",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@types/pdfkit": "^0.13.4",
+    "@types/ws": "^8.5.10",
+    "mongodb-memory-server": "^9.1.8",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  }
+}

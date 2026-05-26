@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* Core Color System Tokens */
+:root {
+  /* Colors */
+  --bg-main: #eaeaea; /* clean grey layout background matching mockup */
+  --bg-card: rgba(255, 255, 255, 0.90); /* slightly reduced opacity white cards for glassy reference UI */
+  --bg-sidebar: rgba(255, 255, 255, 0.90); /* matching sidebar opacity */
+  --sidebar-text: #475569; /* slate-600 */
+  --sidebar-text-active: #0f172a; /* slate-900 */
+  --sidebar-item-hover: #f3f4f6; /* slate-100 */
+  --sidebar-item-active: #ff5e1a; /* Veda Signature Orange */
+  
+  --text-primary: #0f172a; /* slate-900 */
+  --text-secondary: #475569; /* slate-600 */
+  --text-muted: #94a3b8; /* slate-400 */
+  
+  --border-color: #e2e8f0; /* slate-200 */
+  --border-focus: #ff5e1a;
+  
+  --primary: #ff5e1a;
+  --primary-hover: #e04f10;
+  --primary-light: rgba(255, 94, 26, 0.08);
+  
+  --easy: #10b981;
+  --easy-light: rgba(16, 185, 129, 0.1);
+  --moderate: #f59e0b;
+  --moderate-light: rgba(245, 158, 11, 0.1);
+  --hard: #ef4444;
+  --hard-light: rgba(239, 68, 68, 0.1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 15px rgba(255, 94, 26, 0.35);
+
+  /* Typography */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* Dark Mode Override Tokens */
+.dark-theme {
+  --bg-main: #0b0f19; /* deep slate-950 main panel bg */
+  --bg-card: rgba(21, 29, 48, 0.90); /* slate-900 card bg with slightly reduced opacity */
+  --bg-sidebar: rgba(21, 29, 48, 0.90); /* dark sidebar matching card bg */
+  --sidebar-text: #cbd5e1;
+  --sidebar-text-active: #f8fafc;
+  --sidebar-item-hover: rgba(255, 255, 255, 0.05);
+  --text-primary: #f8fafc; /* slate-50 bright primary text */
+  --text-secondary: #cbd5e1; /* slate-300 secondary text */
+  --text-muted: #64748b; /* slate-500 muted labels */
+  --border-color: #1e293b; /* slate-800 divider borders */
+}
+
+/* Custom Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Basic utility helper animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Button & form common interactive resets */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(255, 94, 26, 0.15);
+}
+
+/* Interactive custom badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-easy {
+  background-color: var(--easy-light);
+  color: var(--easy);
+}
+
+.badge-moderate {
+  background-color: var(--moderate-light);
+  color: var(--moderate);
+}
+
+.badge-hard {
+  background-color: var(--hard-light);
+  color: var(--hard);
+}
+
+/* Real A4 Exam Paper Print Layout Configuration */
+@media print {
+  /* Hide all viewport container elements by default */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Select and make only the active Exam Sheet container visible */
+  [class*="examSheet"], [class*="examSheet"] * {
+    visibility: visible;
+  }
+  
+  /* Override layout parents to flow naturally during print and avoid truncation */
+  html, body, 
+  [class*="appContainer"], 
+  [class*="mainPanel"], 
+  [class*="contentViewport"],
+  main {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    position: static !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  /* Position the Printable card at the very top left of the physical pages */
+  [class*="examSheet"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0 !important;
+    padding: 20px !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* Hide interactive layouts, sidebar panels, actions, and non-exam headers */
+  .no-print, 
+  [class*="aiBanner"], 
+  [class*="actionBar"], 
+  nav, 
+  aside, 
+  button, 
+  [class*="sidebar"],
+  [class*="header"]:not([class*="examHeader"]) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Force clean academic print background color */
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Force proper printing of background graphic badge colors */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force proper page breaks between sections and items */
+  [class*="sectionContainer"] {
+    page-break-inside: avoid !important;
+  }
+  
+  [class*="questionItem"] {
+    page-break-inside: avoid !important;
+  }
+}
+

@@ -1,0 +1,766 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px 0 100px; /* buffer space at bottom for floating actions */
+}
+
+/* Dashboard title and subtitle styling with green status dot */
+.dashboardHeader {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.titleWithDotRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.greenStatusDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #22c55e; /* Mockup status dot green */
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+  display: inline-block;
+}
+
+.dashboardTitle {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.dashboardSubtitle {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.deleteText {
+  color: #ef4444;
+}
+
+/* Unified mockup capsule search and filter row */
+.filterSearchCapsule {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: 9999px; /* full round pill capsule */
+  height: 56px;
+  padding: 6px 8px 6px 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.filterSearchCapsule:hover {
+  border-color: var(--text-muted);
+}
+
+.filterMenuContainer {
+  position: relative;
+}
+
+.filterBtnCapsule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  padding: 0 10px;
+  transition: all 0.2s ease;
+}
+
+.filterBtnCapsule:hover {
+  color: var(--text-primary);
+}
+
+.filterBtnCapsuleActive {
+  color: var(--primary) !important;
+}
+
+.filterFunnelIcon {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.filterBtnCapsuleActive .filterFunnelIcon {
+  color: var(--primary) !important;
+}
+
+.activeFilterCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: #ffffff;
+  margin-left: 2px;
+}
+
+.searchCapsuleWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 380px; /* capsule input container width */
+}
+
+.searchCapsuleWrapper .searchIcon {
+  position: absolute;
+  left: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.searchCapsuleWrapper .searchInput {
+  width: 100%;
+  height: 42px;
+  padding-left: 44px;
+  padding-right: 18px;
+  font-size: 0.938rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border-radius: 9999px;
+  border: 1.5px solid var(--border-color);
+  transition: all 0.25s ease;
+}
+
+.searchCapsuleWrapper .searchInput:hover {
+  border-color: var(--text-secondary);
+}
+
+.searchCapsuleWrapper .searchInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 94, 26, 0.15);
+}
+
+/* Option dropdown styling for Dark & Light modes inside dashboard */
+.container select option {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* Cards Grids */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background-color: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px; /* highly curved figma corners */
+  padding: 24px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Elegant gap between title wrapper, body badges, and footer dates */
+  min-height: 210px; /* Dynamic height flow with standard safety padding */
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* spacing between title and subject */
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem; /* slightly larger matching first image */
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.cardSubject {
+  font-size: 0.875rem; /* matching Science - 8th Grade text size */
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* 3-dot dropdown logic */
+.menuContainer {
+  position: relative;
+}
+
+.menuTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: background-color 0.2s ease;
+}
+
+.menuTrigger:hover {
+  background-color: var(--bg-main);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  width: 160px;
+  background-color: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.813rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 100%;
+  text-align: left;
+}
+
+.menuItem:hover {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+}
+
+.menuItemDelete {
+  color: #ef4444;
+}
+
+.menuItemDelete:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* Card metadata stats badges */
+.cardBody {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.statusBadge {
+  display: inline-flex;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statusBadge_completed {
+  background-color: #ecfdf5;
+  color: #059669;
+}
+
+.statusBadge_pending {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.statusBadge_processing {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+.statusBadge_failed {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.marksBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background-color: var(--bg-main);
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+/* Bottom Stats Row */
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0;
+  margin-top: auto; /* Push to bottom to match mockup */
+}
+
+.dateStat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem;
+}
+
+.dateLabel {
+  font-weight: 700;
+  color: var(--text-primary); /* Bold dark mockup label color */
+}
+
+.dateValue {
+  font-weight: 500;
+  color: var(--text-secondary); /* Grey mockup date value color */
+}
+
+/* Floating Actions Button at the bottom center */
+.floatingActionArea {
+  position: fixed;
+  bottom: 24px;
+  left: calc(280px + (100% - 280px) / 2); /* centered relative to dashboard panel */
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.createBtnFloating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background-color: #0f172a; /* high-alert dark pill button */
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 9999px; /* full round pill */
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3), 0 4px 6px -4px rgba(15, 23, 42, 0.3);
+}
+
+.createBtnFloating:hover {
+  background-color: #1e293b;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 991px) {
+  .floatingActionArea {
+    position: fixed !important;
+    bottom: 105px !important; /* sit right above the bottom nav pill */
+    right: 20px !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: 999;
+  }
+
+  .createBtnFloating {
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50% !important; /* circular */
+    background-color: #ffffff !important; /* white background */
+    color: #ff5e1a !important; /* orange plus icon */
+    border: 1.5px solid var(--border-color) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .createBtnFloating span {
+    display: none !important; /* hide text on mobile */
+  }
+
+  .createBtnFloating svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  gap: 15px;
+  font-size: 0.938rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+  width: 100%;
+}
+
+.emptyGraphic {
+  width: 280px;
+  height: 240px;
+  margin-bottom: 24px;
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.emptyDescription {
+  font-family: var(--font-sans);
+  font-size: 0.938rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.createFirstBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background-color: #0f172a; /* Solid mockup slate-black button */
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 9999px; /* rounded pill capsule */
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.createFirstBtn:hover {
+  background-color: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e2e8f0;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive configurations */
+@media (min-width: 1025px) {
+  .cardGrid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .floatingActionArea {
+    left: 50%;
+  }
+  
+  .cardGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .dashboardHeader {
+    display: none !important;
+  }
+
+  .filterSearchCapsule {
+    height: 52px;
+    padding: 6px 6px 6px 16px;
+    border-radius: 9999px; /* full round pill card on mobile */
+  }
+
+  .searchCapsuleWrapper {
+    width: auto;
+    flex: 1;
+    margin-left: 10px;
+  }
+
+  .searchCapsuleWrapper .searchInput {
+    height: 38px;
+    padding-left: 36px;
+    font-size: 0.875rem;
+  }
+
+  .searchCapsuleWrapper .searchIcon {
+    left: 12px;
+  }
+
+  .filterBtnCapsule {
+    font-size: 0.875rem;
+    padding: 0 4px;
+  }
+}
+
+/* Lifecycle styled select dropdown */
+.lifecycleSelect {
+  padding: 3px 24px 3px 10px; /* space for custom select arrow */
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 6px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.lifecycleSelect:focus {
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Color schemes for light mode AND dark mode support */
+/* Ongoing: Blue */
+.lifecycleSelect_ongoing {
+  background-color: #eff6ff !important;
+  color: #2563eb !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%232563eb' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E") !important;
+}
+
+/* Due: Red */
+.lifecycleSelect_due {
+  background-color: #fef2f2 !important;
+  color: #dc2626 !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23dc2626' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E") !important;
+}
+
+/* Completed: Green */
+.lifecycleSelect_completed {
+  background-color: #ecfdf5 !important;
+  color: #059669 !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23059669' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E") !important;
+}
+
+/* Support for dark mode selectors */
+:global(.dark) .lifecycleSelect_ongoing {
+  background-color: rgba(37, 99, 235, 0.15) !important;
+  color: #60a5fa !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2360a5fa' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E") !important;
+}
+
+:global(.dark) .lifecycleSelect_due {
+  background-color: rgba(220, 38, 38, 0.15) !important;
+  color: #f87171 !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23f87171' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E") !important;
+}
+
+:global(.dark) .lifecycleSelect_completed {
+  background-color: rgba(5, 150, 105, 0.15) !important;
+  color: #34d399 !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2334d399' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E") !important;
+}
+
+/* Option dropdown styling for Dark & Light modes inside dashboard */
+.container select option {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* Sleek Filter Menu Popover Styling */
+.filterMenuContainer {
+  position: relative;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px; /* full round pill */
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filterBtn:hover {
+  border-color: var(--primary);
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.filterBtnActive {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  background-color: var(--primary-light) !important;
+}
+
+.activeFilterCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: #ffffff;
+  margin-left: 2px;
+}
+
+.filterPopover {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  width: 240px;
+  background-color: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  padding: 16px;
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  animation: filterFadeIn 0.2s ease-out;
+}
+
+@keyframes filterFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popoverSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.popoverLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.popoverSelect {
+  width: 100%;
+  height: 38px;
+  padding: 0 32px 0 10px;
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.popoverSelect:hover {
+  border-color: var(--text-secondary);
+}
+
+.popoverSelect:focus {
+  border-color: var(--primary);
+}
+
+:global(.dark-theme) .popoverSelect {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+}
+
+.clearFiltersBtn {
+  margin-top: 14px;
+  width: 100%;
+  height: 34px;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.813rem;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.clearFiltersBtn:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.filterPopover select option {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}

@@ -1,0 +1,656 @@
+.formCard {
+  background-color: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardHeader {
+  margin-bottom: 30px;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.cardSubtitle {
+  font-size: 0.938rem;
+  color: var(--text-secondary);
+}
+
+/* File Upload drag-and-drop area matching Figma dashed layout */
+.uploadArea {
+  border: 2px dashed var(--border-color);
+  border-radius: 20px;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: var(--bg-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-bottom: 30px;
+}
+
+.uploadArea:hover {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+.uploadIcon {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease;
+}
+
+.uploadArea:hover .uploadIcon {
+  transform: translateY(-4px);
+  color: var(--primary);
+}
+
+.uploadTitle {
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.uploadSubtitle {
+  font-size: 0.813rem;
+  color: var(--text-muted);
+}
+
+.browseBtn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 20px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.browseBtn:hover {
+  background-color: var(--bg-main);
+  border-color: var(--text-muted);
+}
+
+/* FormGroup for simple rows */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dateInputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.dateInput {
+  width: 100%;
+  height: 46px;
+  padding-left: 42px;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dateInput:hover {
+  border-color: var(--text-muted);
+}
+
+.dateInput:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(255, 94, 26, 0.15);
+}
+
+.calendarIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #1e293b;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+/* Question configurations grid styling */
+.questionConfigHeader {
+  display: grid;
+  grid-template-columns: 2.5fr 36px 1.2fr 1.2fr;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.headerLabel {
+  font-size: 0.813rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.questionRow {
+  display: grid;
+  grid-template-columns: 2.5fr 36px 1.2fr 1.2fr;
+  gap: 16px;
+  margin-bottom: 12px;
+  align-items: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.selectInput {
+  width: 100%;
+  height: 44px;
+  background-color: #ffffff; /* White background */
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px; /* Capsule shape */
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 18px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-left: 20px;
+  padding-right: 40px;
+  transition: all 0.2s ease;
+}
+
+.selectInput:hover {
+  border-color: var(--text-muted);
+}
+
+.selectInput:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(255, 94, 26, 0.15);
+}
+
+:global(.dark-theme) .selectInput {
+  background-color: var(--bg-card);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+}
+
+/* Counter control plus and minus grids */
+.counterControlGroup {
+  display: contents; /* preserves the parent grid layout on desktop */
+}
+
+.counterControlLabel {
+  display: none; /* hidden on desktop */
+}
+
+.counterControl {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff; /* White background */
+  border: 1px solid var(--border-color);
+  border-radius: 9999px; /* Capsule shape */
+  padding: 3px 6px;
+  width: 100%;
+  justify-content: space-between;
+  height: 44px;
+}
+
+:global(.dark-theme) .counterControl {
+  background-color: var(--bg-card);
+}
+
+.counterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--text-muted);
+  border: none;
+  box-shadow: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.counterBtn:hover:not(:disabled) {
+  color: var(--primary);
+}
+
+.counterBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.counterValue {
+  font-size: 0.938rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  width: 24px;
+  text-align: center;
+}
+
+.deleteRowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteRowBtn:hover {
+  color: #ef4444;
+}
+
+.addRowBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addRowBtn:hover {
+  opacity: 0.85;
+}
+
+.plusIconCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #22252a; /* Dark charcoal circle matching mockup */
+  color: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+:global(.dark-theme) .plusIconCircle {
+  background-color: var(--primary);
+}
+
+.addRowBtn:hover .plusIconCircle {
+  transform: scale(1.08);
+}
+
+.textareaInput {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Stepper buttons wrapper */
+.stepperActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-color);
+  padding-top: 30px;
+  margin-top: 40px;
+}
+
+.prevBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.prevBtn:hover {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+}
+
+.nextBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border-radius: 9999px;
+  background-color: #0f172a; /* Slate 900 matching Figma dark next button */
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.nextBtn:hover {
+  background-color: #1e293b;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+.nextBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Custom error message styling */
+.errorMsg {
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Stepper state progress bars */
+.progressBar {
+  width: 100%;
+  height: 4px;
+  background-color: var(--border-color);
+  border-radius: 9999px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+/* Responsive grid changes */
+@media (max-width: 767px) {
+  .questionConfigHeader {
+    display: none;
+  }
+  
+  .questionRow {
+    grid-template-columns: 1fr;
+    gap: 14px !important;
+    padding: 18px !important;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    background-color: var(--bg-main);
+    position: relative;
+  }
+  
+  .deleteRowBtn {
+    position: static !important;
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm) !important;
+    width: 44px !important; /* Make it slightly wider for easier tap targets on mobile */
+    height: 44px !important;
+    border-radius: 8px !important; /* Square rounded to match the select dropdown curves */
+  }
+  
+  .counterControl {
+    max-width: 180px;
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+
+  .counterControlGroup {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+
+  .counterControlLabel {
+    display: block !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: var(--text-secondary) !important;
+  }
+}
+
+/* Custom Time Picker Row Styling */
+.timePickerContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.timePickerSubgroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.timeSelect {
+  flex: 1;
+  height: 46px;
+  padding-left: 14px;
+  padding-right: 32px; /* space for normal select arrow */
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  appearance: none;
+  font-weight: 500;
+  outline: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.timeSelect:hover {
+  border-color: var(--text-muted);
+}
+
+.timeSelect:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(255, 94, 26, 0.15);
+}
+
+:global(.dark-theme) .timeSelect {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+}
+
+.timePickerLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Option dropdown styling for Dark & Light modes */
+.formCard select option {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* Page headers inside form views matching list view dashboard */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px 0 100px; /* buffer space at bottom for floating actions */
+}
+
+.dashboardHeader {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.titleWithDotRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.greenStatusDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+  display: inline-block;
+}
+
+.dashboardTitle {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.dashboardSubtitle {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Two segment progress indicator bar */
+.stepperProgress {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.progressSegment {
+  height: 6px;
+  flex: 1;
+  background-color: #e2e8f0; /* Mockup light grey segment color */
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+}
+
+.progressSegmentActive {
+  background-color: #475569; /* Mockup dark grey segment color */
+}
+
+:global(.dark-theme) .progressSegment {
+  background-color: #1e293b;
+}
+
+:global(.dark-theme) .progressSegmentActive {
+  background-color: #94a3b8;
+}
+
+.uploadDescription {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: -15px;
+  margin-bottom: 25px;
+}
+
+/* Two-column and Three-column Form Grid Row Selectors */
+.formGridTwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.formGridThree {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+/* Mobile responsive optimizations for viewports < 991px */
+@media (max-width: 991px) {
+  .dashboardHeader {
+    display: none !important;
+  }
+
+  .formCard {
+    padding: 24px 20px !important; /* Reduce visual padding constraints */
+    border-radius: 20px;
+  }
+
+  .formGridTwo, .formGridThree {
+    grid-template-columns: 1fr !important; /* Force grids to stack neatly in single column */
+    gap: 16px;
+    margin-top: 10px;
+    margin-bottom: 16px;
+  }
+
+  .stepperActions {
+    padding-top: 20px;
+    margin-top: 25px;
+  }
+
+  .prevBtn, .nextBtn {
+    padding: 10px 20px !important; /* Slim down stepper button heights */
+    font-size: 0.875rem;
+  }
+}
+
+/* Hide native browser date picker icon */
+.dateInput::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
