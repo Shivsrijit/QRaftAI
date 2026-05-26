@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Download, RefreshCw, FilePlus, Printer, Sparkles } from 'lucide-react';
-import { useAssignmentStore } from '../store/useAssignmentStore';
+import { useAssignmentStore, API_BASE_URL } from '../store/useAssignmentStore';
 import styles from '../styles/paper.module.css';
 
 export default function QuestionPaper() {
@@ -24,7 +24,7 @@ export default function QuestionPaper() {
        return;
      }
 
-     const fullUrl = `http://localhost:5001/api/assignments/${_id}/download?t=${Date.now()}`;
+     const fullUrl = `${API_BASE_URL}/assignments/${_id}/download?t=${Date.now()}`;
      const filename = `${currentAssignment.title.toLowerCase().replace(/[^a-z0-9]+/g, '_')}_question_paper.pdf`;
 
      if (typeof window !== 'undefined' && 'showSaveFilePicker' in window) {

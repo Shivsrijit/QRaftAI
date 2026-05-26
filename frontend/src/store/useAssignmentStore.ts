@@ -95,7 +95,7 @@ interface AssignmentState {
   initializeSettings: () => void;
 }
 
-const API_BASE_URL = 'http://localhost:5001/api';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5001/api';
 let socket: WebSocket | null = null;
 
 export const useAssignmentStore = create<AssignmentState>((set, get) => ({
@@ -329,7 +329,9 @@ export const useAssignmentStore = create<AssignmentState>((set, get) => ({
       socket.close();
     }
 
-    const wsUrl = 'ws://localhost:5002';
+    const isSecure = API_BASE_URL.startsWith('https:');
+    const host = API_BASE_URL.replace(/^https?:\/\//, '').replace(/\/api$/, '');
+    const wsUrl = `${isSecure ? 'wss://' : 'ws://'}${host}`;
     console.log(`Opening WebSocket client connection to ${wsUrl}`);
     socket = new WebSocket(wsUrl);
 

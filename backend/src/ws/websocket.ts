@@ -1,3 +1,4 @@
+import { Server } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
 import { config } from '../config/env';
 
@@ -6,10 +7,10 @@ const subscriptions = new Map<string, Set<WebSocket>>();
 
 let wss: WebSocketServer | null = null;
 
-export function initializeWebSocketServer() {
-  wss = new WebSocketServer({ port: config.WS_PORT });
+export function initializeWebSocketServer(server: Server) {
+  wss = new WebSocketServer({ server });
 
-  console.log(`WebSocket server running on ws://localhost:${config.WS_PORT}`);
+  console.log('WebSocket server initialized and listening on the shared HTTP server.');
 
   wss.on('connection', (ws) => {
     console.log('New client connected to WebSocket.');

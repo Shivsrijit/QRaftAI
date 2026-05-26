@@ -11,16 +11,16 @@ async function bootstrap() {
   // 1. Establish Database Connection (Mongoose + dynamic in-memory Mongo fallback)
   await connectDB();
 
-  // 2. Initialize WebSocket Server for progress notifications
-  initializeWebSocketServer();
-
-  // 3. Initialize background BullMQ / In-Memory Generation Queue
+  // 2. Initialize background BullMQ / In-Memory Generation Queue
   await initializeQueue(processAssignmentGeneration);
 
-  // 4. Start HTTP Server
+  // 3. Start HTTP Server
   const server = app.listen(config.PORT, () => {
     console.log(`HTTP Express Server listening at: http://localhost:${config.PORT}`);
   });
+
+  // 4. Initialize WebSocket Server on the shared HTTP port for progress notifications
+  initializeWebSocketServer(server);
 
   // Handle server shutdown cleanups
   process.on('SIGTERM', () => {
