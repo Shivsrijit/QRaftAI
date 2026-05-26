@@ -110,9 +110,9 @@ export const useAssignmentStore = create<AssignmentState>((set, get) => ({
   // Initialize statically to prevent Next.js SSR hydration mismatch
   schoolName: 'Delhi Public School',
   schoolAddress: 'Bokaro Steel City',
-  schoolLogo: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=100&auto=format&fit=crop',
-  userName: 'Lakshya',
-  userAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop',
+  schoolLogo: 'https://i.pinimg.com/736x/c9/03/f8/c903f84b3130bee7c5b9ae6388360b25.jpg',
+  userName: 'Shivsrijit',
+  userAvatar: 'https://static.vecteezy.com/system/resources/previews/015/413/618/non_2x/elegant-man-in-business-suit-with-badge-man-business-avatar-profile-picture-illustration-isolated-vector.jpg',
   darkMode: false,
 
   initializeSettings: () => {
@@ -120,9 +120,9 @@ export const useAssignmentStore = create<AssignmentState>((set, get) => ({
       set({
         schoolName: window.localStorage.getItem('veda_school_name') || 'Delhi Public School',
         schoolAddress: window.localStorage.getItem('veda_school_address') || 'Bokaro Steel City',
-        schoolLogo: window.localStorage.getItem('veda_school_logo') || 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=100&auto=format&fit=crop',
-        userName: window.localStorage.getItem('veda_user_name') || 'Lakshya',
-        userAvatar: window.localStorage.getItem('veda_user_avatar') || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop',
+        schoolLogo: window.localStorage.getItem('veda_school_logo') || 'https://i.pinimg.com/736x/c9/03/f8/c903f84b3130bee7c5b9ae6388360b25.jpg',
+        userName: window.localStorage.getItem('veda_user_name') || 'Shivsrijit',
+        userAvatar: window.localStorage.getItem('veda_user_avatar') || 'https://static.vecteezy.com/system/resources/previews/015/413/618/non_2x/elegant-man-in-business-suit-with-badge-man-business-avatar-profile-picture-illustration-isolated-vector.jpg',
         darkMode: window.localStorage.getItem('veda_dark_mode') === 'true'
       });
     }
