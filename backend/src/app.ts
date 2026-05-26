@@ -52,6 +52,15 @@ app.use('/pdfs', express.static(path.join(__dirname, '../public/pdfs'), {
   }
 }));
 
+// Root Welcome / Redirect API
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome to the VedaAI Assessment Creator API',
+    healthCheck: '/api/health',
+    frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000'
+  });
+});
+
 // Health Check API
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok', service: 'VedaAI Assessment Creator API' });
