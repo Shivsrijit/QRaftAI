@@ -1,6 +1,6 @@
 # System Architecture and API Documentation
 
-VedaAI is structured as a decoupled full stack application consisting of a React based Next.js frontend and a TypeScript Node/Express backend. Realtime updates, background scheduling, caching, and document rendering are handled via specialized modular services.
+QRaft is structured as a decoupled full stack application consisting of a React based Next.js frontend and a TypeScript Node/Express backend. Realtime updates, background scheduling, caching, and document rendering are handled via specialized modular services.
 
 ## Architecture Overview
 
@@ -31,8 +31,23 @@ graph TD
 
 ## Database Schema
 
+### `User` Schema
+This represents the user entity stored inside MongoDB for JWT authentication and multi-user configuration:
+
+```typescript
+const UserSchema = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+  password: { type: String, required: true },
+  schoolName: { type: String, required: true },
+  schoolAddress: { type: String, default: '' },
+  schoolLogo: { type: String, default: '...' },
+  userAvatar: { type: String, default: '...' }
+}, { timestamps: true });
+```
+
 ### `Assignment` Schema
-This represents the root assignment entity stored inside MongoDB:
+This represents the root assignment entity stored inside MongoDB. Each assignment is associated with a specific user for secure multi-tenant access:
 
 ```typescript
 const QuestionTypeConfigSchema = new Schema({
@@ -64,6 +79,7 @@ const AssessmentResultSchema = new Schema({
 });
 
 const AssignmentSchema = new Schema({
+  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   title: { type: String, required: true },
   schoolName: { type: String, required: true },
   subject: { type: String, required: true },
@@ -122,6 +138,9 @@ To enable live progress tracking during generation, the frontend establishes a W
 
 ## REST API Endpoints
 
+All endpoints except System Health and Authentication require a valid JWT token sent in the `Authorization` header:
+`Authorization: Bearer <your_jwt_token>`
+
 ### 1. System Health
 * **Method**: `GET`
 * **URL**: `/api/health`
@@ -129,21 +148,93 @@ To enable live progress tracking during generation, the frontend establishes a W
     ```json
     {
       "status": "ok",
-      "service": "VedaAI Assessment Creator API"
+      "service": "QRaft AI Assessment Creator API"
     }
     ```
 
-### 2. Fetch All Assignments
+### 2. User Registration
+* **Method**: `POST`
+* **URL**: `/api/auth/register`
+* **Headers**: `Content-Type: application/json`
+* **Body Schema**:
+    ```json
+    {
+      "name": "John Doe",
+      "email": "john.doe@school.edu",
+      "password": "securepassword123",
+      "schoolName": "Green Valley High School"
+    }
+    ```
+* **Validation**: Password must be at least 6 characters. Email must be unique.
+* **Response**: `201 Created`
+    ```json
+    {
+      "token": "eyJhbGciOi...",
+      "user": {
+        "id": "60d5ec...",
+        "name": "John Doe",
+        "email": "john.doe@school.edu",
+        "schoolName": "Green Valley High School",
+        "schoolAddress": "",
+        "schoolLogo": "...",
+        "userAvatar": "..."
+      }
+    }
+    ```
+
+### 3. User Login
+* **Method**: `POST`
+* **URL**: `/api/auth/login`
+* **Headers**: `Content-Type: application/json`
+* **Body Schema**:
+    ```json
+    {
+      "email": "john.doe@school.edu",
+      "password": "securepassword123"
+    }
+    ```
+* **Response**: `200 OK`
+    ```json
+    {
+      "token": "eyJhbGciOi...",
+      "user": { ... }
+    }
+    ```
+
+### 4. Fetch Current User Details
+* **Method**: `GET`
+* **URL**: `/api/auth/me`
+* **Headers**: `Authorization: Bearer <token>`
+* **Response**: `200 OK` (User object without password)
+
+### 5. Update User Profile
+* **Method**: `PUT`
+* **URL**: `/api/auth/update`
+* **Headers**: `Authorization: Bearer <token>`
+* **Body Schema**:
+    ```json
+    {
+      "name": "John Doe Updated",
+      "schoolName": "New School Academy",
+      "schoolAddress": "123 Education Lane",
+      "password": "newpassword123"
+    }
+    ```
+* **Validation**: Password must be at least 6 characters if changed.
+* **Response**: `200 OK` (Updated user object)
+
+### 6. Fetch All Assignments (User-Specific)
 * **Method**: `GET`
 * **URL**: `/api/assignments`
+* **Headers**: `Authorization: Bearer <token>`
 * **Caching**: Cached for 60 seconds.
-* **Logic**: Automatically scans and updates assignments whose due dates have passed from `ongoing` to `due`.
+* **Logic**: Returns only the assignments belonging to the authenticated user. Automatically scans and updates assignments whose due dates have passed from `ongoing` to `due`.
 * **Response**: `200 OK` (Array of Assignment objects)
 
-### 3. Create New Assignment
+### 7. Create New Assignment
 * **Method**: `POST`
 * **URL**: `/api/assignments`
-* **Headers**: `Content-Type: application/json`
+* **Headers**: `Content-Type: application/json`, `Authorization: Bearer <token>`
 * **Body Schema**:
     ```json
     {
@@ -160,23 +251,29 @@ To enable live progress tracking during generation, the frontend establishes a W
       ]
     }
     ```
-* **Response**: `201 Created` (The saved `pending` assignment object)
+* **Response**: `201 Created` (The saved `pending` assignment object with `user` ID populated)
 
-### 4. Fetch Assignment Details
+### 8. Fetch Assignment Details
 * **Method**: `GET`
 * **URL**: `/api/assignments/:id`
+* **Headers**: `Authorization: Bearer <token>`
+* **Access Control**: Validates that the requested assignment belongs to the authenticated user.
 * **Caching**: Cached individually for 60 seconds.
 * **Response**: `200 OK` (Single Assignment object)
 
-### 5. Regenerate Assignment
+### 9. Regenerate Assignment
 * **Method**: `POST`
 * **URL**: `/api/assignments/:id/regenerate`
+* **Headers**: `Authorization: Bearer <token>`
+* **Access Control**: Validates that the assignment belongs to the authenticated user.
 * **Logic**: Resets status to `pending`, clears older results, and re-queues the background generation job.
 * **Response**: `200 OK` (Reset Assignment object)
 
-### 6. Delete Assignment
+### 10. Delete Assignment
 * **Method**: `DELETE`
 * **URL**: `/api/assignments/:id`
+* **Headers**: `Authorization: Bearer <token>`
+* **Access Control**: Validates that the assignment belongs to the authenticated user.
 * **Response**: `200 OK`
     ```json
     {
@@ -185,9 +282,11 @@ To enable live progress tracking during generation, the frontend establishes a W
     }
     ```
 
-### 7. Update Lifecycle Status
+### 11. Update Lifecycle Status
 * **Method**: `PATCH`
 * **URL**: `/api/assignments/:id/status`
+* **Headers**: `Authorization: Bearer <token>`
+* **Access Control**: Validates that the assignment belongs to the authenticated user.
 * **Body**:
     ```json
     {
@@ -196,9 +295,12 @@ To enable live progress tracking during generation, the frontend establishes a W
     ```
 * **Response**: `200 OK` (Updated Assignment object)
 
-### 8. Download PDF
+### 12. Download PDF
 * **Method**: `GET`
 * **URL**: `/api/assignments/:id/download`
+* **Headers**: `Authorization: Bearer <token>`
+* **Query Parameter Fallback**: Supports `?token=<token>` for browser download links.
+* **Access Control**: Validates that the assignment belongs to the user matching the token.
 * **Headers Sent**:
     * `Content-Type: application/pdf`
     * `Content-Disposition: attachment; filename="weekly_biology_test_question_paper.pdf"`

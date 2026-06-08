@@ -1,6 +1,6 @@
 # Engineering Approach and Design Decisions
 
-This document outlines the core technical decisions, architectural patterns, and problem solving strategies adopted during the development of the VedaAI Assessment Creator.
+This document outlines the core technical decisions, architectural patterns, and problem solving strategies adopted during the development of the QRaft Assessment Creator.
 
 ## Resolving Zustand SSR Hydration Anomalies
 
@@ -73,3 +73,34 @@ Storing pre-rendered PDF files on disk consumes massive amounts of storage over 
 We chose to generate PDF documents dynamically inside the backend service using **PDFKit**:
 * When a user hits the `/download` route, the backend fetches the assignment record from MongoDB, initiates a PDFKit stream, and writes the vector layout on the fly directly to the Express `Response` socket.
 * This approach completely eliminates static file clutter, guarantees that the downloaded document is always 100% in sync with the database record, and keeps the server storage footprint at an absolute minimum.
+
+## Secure Multitenancy and JWT Authentication
+
+### The Problem
+Allowing anyone to view, edit, or download documents created by other users is a major security vulnerability. Additionally, passing authorization tokens in URLs (e.g. for downloading files) is a bad practice as it leaks credentials in browser history, server logs, and referrer headers.
+
+### Our Solution
+1. **Request Isolation**: Added user-association to all `Assignment` schemas. Every backend route checks that the requesting user's ID matches the assignment's `user` ID. Querying `/api/assignments` automatically returns only the caller's documents.
+2. **Blob Fetch Flow**: Instead of using direct `<a href>` elements that cannot pass custom authorization headers, the client fetches the PDF as an in-memory `Blob` using the `fetch` API, passing the `Authorization` header securely. This binary payload is converted to a local browser object URL (`URL.createObjectURL(blob)`) for download, preventing token exposure in browser navigation.
+3. **Query Token Fallback**: If browser restrictions prevent direct Blob fetches, a fallback query param `?token=...` is supported under strict validation constraints with high-entropy JWT signatures.
+
+## Obsidian Space Glassmorphism and Gilded Gold Palette
+
+### The Problem
+Standard blue/gray enterprise styling feels generic and uninspiring. Visual aesthetics directly affect user retention and perception of premium quality.
+
+### Our Solution
+We redesigned the color and component hierarchy:
+* **Backgrounds**: Transformed to deep space obsidian hues (`#060709` and `#0b0d13`).
+* **Accents**: Replaced general blues with a luxurious Gilded Gold (`#f3b03b` and `#d28b1b`) color.
+* **Glassmorphism**: Leveraged backdrop-filters (`blur(12px)`) combined with borders of subtle semi-transparent white/gold overlays (`rgba(243, 176, 59, 0.08)`) to produce a highly premium, futuristic dashboard appearance.
+* **Micro-interactions**: Enhanced card hovers and button clicks with glow animations matching the golden palette.
+
+## Input Sanitation and Password Security
+
+### The Problem
+Educators should not have default legacy addresses (e.g., "Bokaro Steel City") pre-populated in their profiles upon signing up. Furthermore, weak user inputs (such as single-digit passwords) leave accounts vulnerable to basic brute-force attacks.
+
+### Our Solution
+1. **Sanitization Utility**: Added an address cleanup method in the frontend store that parses database values and removes default place names. Newly registered users default to an empty string (`schoolAddress: ''`) instead of placeholders.
+2. **Password Validation Rules**: Enforced a minimum length of 6 characters in both frontend and backend controllers during account creation and profile update, blocking insecure submissions at both layers.

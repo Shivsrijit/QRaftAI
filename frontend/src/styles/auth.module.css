@@ -40,7 +40,8 @@
   height: 64px;
   object-fit: contain;
   margin-bottom: 8px;
-  filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.25));
+  border-radius: 16px;
+  filter: drop-shadow(0 4px 12px rgba(243, 176, 59, 0.25));
 }
 
 .logoTextBadge {

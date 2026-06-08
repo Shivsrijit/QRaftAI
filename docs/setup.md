@@ -1,6 +1,6 @@
 # Local Development Setup Guide
 
-This guide will walk you through setting up and running the VedaAI Assessment Creator on your local machine from scratch.
+This guide will walk you through setting up and running the QRaft Assessment Creator on your local machine from scratch.
 
 ## Prerequisites
 
@@ -35,9 +35,10 @@ cd "VEDA AI"
     MONGODB_URI=mongodb+srv://your-mongodb-uri-here
     REDIS_URL=redis://127.0.0.1:6379
     GEMINI_API_KEY=AIzaSy...your-actual-gemini-key
+    JWT_SECRET=your-secure-jwt-secret-key
     ```
     
-    > **Note**: Make sure to replace `MONGODB_URI` with your actual MongoDB connection string and `GEMINI_API_KEY` with your Google Gemini developer key. If you do not have a Gemini API key yet, you can obtain one from the Google AI Studio.
+    > **Note**: Make sure to replace `MONGODB_URI` with your actual MongoDB connection string, `GEMINI_API_KEY` with your Google Gemini developer key (obtained from Google AI Studio), and `JWT_SECRET` with a strong high-entropy key for user authentication.
 
 4. Start the backend in development mode:
     ```bash
@@ -63,11 +64,11 @@ cd "VEDA AI"
     ```
     http://localhost:3000
     ```
-    You will see the fully interactive VedaAI dashboard loading seamlessly.
+    You will see the fully interactive QRaft dashboard loading seamlessly.
 
 ## Building for Production
 
-If you are deploying VedaAI to a production environment, follow these build steps:
+If you are deploying QRaft to a production environment, follow these build steps:
 
 ### Build Backend
 ```bash
