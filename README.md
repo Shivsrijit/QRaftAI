@@ -1,6 +1,6 @@
 # QRaft Assessment Creator
 
-Deployment Link: https://veda-ai-assessment-generator-shiv.vercel.app/
+Deployment Link: https://qraft-ai-assessment-generator-shiv.vercel.app/
 
 QRaft is an AI powered assessment generation platform built for educators to compile curriculum aligned question papers and export them as formatted, print ready PDFs.
 
